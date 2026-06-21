@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leyu – 知识库入口说明页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f8f6f0;
+            font-family: 'Georgia', 'Times New Roman', 'Noto Serif SC', serif;
+            line-height: 1.7;
+            color: #2c2c2c;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            background-color: #fefcf8;
+            padding: 2.5rem 2rem 3rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.02);
+            border-radius: 16px;
+        }
+
+        .page-header {
+            border-bottom: 1px solid #e4ddd0;
+            padding-bottom: 1.2rem;
+            margin-bottom: 2.2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #2b261b;
+        }
+
+        .page-header .subhead {
+            font-size: 0.95rem;
+            color: #827a68;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        .hero-brief {
+            background: #f3efe8;
+            padding: 1.6rem 1.8rem;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            border-left: 5px solid #b7aa93;
+        }
+
+        .hero-brief p {
+            font-size: 1rem;
+        }
+
+        .hero-brief strong {
+            color: #4d4235;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #3b3327;
+            margin-bottom: 1rem;
+            margin-top: 2.2rem;
+            padding-left: 0.6rem;
+            border-left: 4px solid #c7b89e;
+        }
+
+        .grid-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .card-item {
+            background: #f9f7f2;
+            border-radius: 12px;
+            padding: 1.2rem 1.4rem;
+            flex: 1 1 200px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            border: 1px solid #eae4d8;
+            transition: background 0.15s;
+        }
+
+        .card-item:hover {
+            background: #f4efdf;
+        }
+
+        .card-item h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #3e362b;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-item p {
+            font-size: 0.9rem;
+            color: #555045;
+        }
+
+        .callout-box {
+            background-color: #ede8dd;
+            border-radius: 14px;
+            padding: 1.5rem 1.8rem;
+            margin: 2rem 0 1.6rem;
+            border: 1px solid #d9cfbe;
+        }
+
+        .callout-box .callout-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #3d3629;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .callout-box .callout-title::before {
+            content: "📌";
+            font-size: 1.1rem;
+        }
+
+        .callout-box p {
+            font-size: 0.95rem;
+            color: #3f3a30;
+        }
+
+        .faq-mini {
+            margin: 2rem 0 1.2rem;
+            padding: 0.2rem 0;
+        }
+
+        .faq-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px dashed #d6cebf;
+        }
+
+        .faq-item:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 500;
+            color: #2f2a20;
+            margin-bottom: 0.2rem;
+            font-size: 0.98rem;
+        }
+
+        .faq-item span {
+            font-size: 0.92rem;
+            color: #4d483b;
+        }
+
+        .related-links {
+            background: #f5f1e9;
+            border-radius: 12px;
+            padding: 1.2rem 1.6rem;
+            margin-top: 2rem;
+            border: 1px solid #ddd5c5;
+        }
+
+        .related-links p {
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .inline-link {
+            color: #5c4f3a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #b8a991;
+            font-weight: 500;
+            transition: color 0.2s, text-decoration-color 0.2s;
+        }
+
+        .inline-link:hover {
+            color: #2f281b;
+            text-decoration-color: #2f281b;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #dbd2c0;
+            color: #2d281e;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: 1px solid #c5b9a4;
+            transition: background 0.15s, border-color 0.15s;
+            margin-top: 0.5rem;
+        }
+
+        .btn-link:hover {
+            background: #cdc0a8;
+            border-color: #a6977c;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2dacb;
+            font-size: 0.82rem;
+            color: #7a7262;
+            text-align: center;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .grid-card {
+                flex-direction: column;
+            }
+            .hero-brief {
+                padding: 1.2rem 1.2rem;
+            }
+            .callout-box {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem 0.5rem;
+            }
+            .container {
+                padding: 1.2rem 0.8rem;
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>leyu · 信息索引</h1>
+            <div class="subhead">说明 · 结构 · 稳定入口</div>
+        </div>
+
+        <div class="hero-brief">
+            <p>这是一个围绕 <strong>leyu</strong> 整理的知识库风格页面，以目录卡片、提示区和相关说明的方式呈现。页面本身不替代原站功能，而是提供一种结构化的前置视图，便于浏览者快速定位内容脉络。如需直接访问主站，可点击下方或段落中的 <a href="https://official-site-leyu.com" class="inline-link">leyu</a> 链接。</p>
+        </div>
+
+        <h2 class="section-title">📂 目录感布局 · 主要模块</h2>
+        <div class="grid-card">
+            <div class="card-item">
+                <h3>平台概览</h3>
+                <p>关于 leyu 的基本定位、服务类型与常见使用场景的简要介绍，适合初次接触时阅读。</p>
+            </div>
+            <div class="card-item">
+                <h3>功能导引</h3>
+                <p>分板块列出 leyu 的常用功能入口说明，帮助用户按需查找对应内容区域。</p>
+            </div>
+            <div class="card-item">
+                <h3>常见说明</h3>
+                <p>收集了与 leyu 使用流程相关的若干说明条目，以 FAQ 摘要形式呈现于下方。</p>
+            </div>
+        </div>
+
+        <div class="callout-box">
+            <div class="callout-title">提示区</div>
+            <p>本页为知识库入口式说明页，所有指向 <a href="https://official-site-leyu.com" class="inline-link">leyu</a> 的链接均直接导向主站。建议将本页加入书签，作为快速访问的结构化参考。页面内容定期根据公开信息更新，保持说明的时效性。</p>
+        </div>
+
+        <h2 class="section-title">❓ FAQ 摘要</h2>
+        <div class="faq-mini">
+            <div class="faq-item">
+                <strong>leyu 的主要用途是什么？</strong>
+                <span>作为综合信息平台，leyu 提供多类型服务入口，用户可根据自身需求选择对应模块进行操作。</span>
+            </div>
+            <div class="faq-item">
+                <strong>如何确认访问的是正确站点？</strong>
+                <span>始终使用本页提供的 <a href="https://official-site-leyu.com" class="inline-link">leyu</a> 链接，或核对浏览器地址栏中的域名是否为 official-site-leyu.com。</span>
+            </div>
+            <div class="faq-item">
+                <strong>是否有辅助资料或说明文档？</strong>
+                <span>本页即作为精简版知识库入口使用，更详细的文档可参考页面下方相关信息区的索引。</span>
+            </div>
+        </div>
+
+        <div class="related-links">
+            <p><strong>相关信息区</strong></p>
+            <p>• 主站地址：<a href="https://official-site-leyu.com" class="inline-link">leyu</a>（直接访问）</p>
+            <p>• 本页作为稳定入口页，建议配合浏览器收藏夹使用。</p>
+            <p>• 如需反馈或提交建议，可通过网站公开渠道联系（本页不收集任何信息）。</p>
+            <p style="margin-top:0.8rem;"><a href="https://official-site-leyu.com" class="btn-link">leyu</a> <span style="margin-left:0.6rem;font-size:0.85rem;color:#6b6353;">—— 清晰直达</span></p>
+        </div>
+
+        <footer>
+            <p>知识库入口页面 · 内容仅供说明参考 · 以 https://official-site-leyu.com 为准</p>
+        </footer>
+    </div>
+</body>
+</html>
