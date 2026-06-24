@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>MK体育 · 稳定入口与信息页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f9fc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a2e3b;
+            padding: 20px 16px 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrap {
+            max-width: 640px;
+            width: 100%;
+        }
+
+        /* 主视觉区 – 卡片式网格氛围 */
+        .hero-card {
+            background: linear-gradient(145deg, #d9f0f5 0%, #b5dfe9 100%);
+            border-radius: 32px;
+            padding: 36px 24px 30px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 20px -6px rgba(30, 90, 100, 0.12);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .hero-card::before {
+            content: " ";
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #0f3c48;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title span {
+            background: #0d4b5a;
+            color: white;
+            padding: 0 8px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: #1f5563;
+            background: rgba(255,255,255,0.45);
+            backdrop-filter: blur(2px);
+            padding: 12px 16px;
+            border-radius: 24px;
+            display: inline-block;
+            margin-top: 6px;
+            font-weight: 450;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .hero-sub i {
+            font-style: normal;
+            background: #2b7d8f;
+            color: white;
+            padding: 0 8px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+        }
+
+        /* 网格卡片容器 */
+        .grid-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 26px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 26px;
+            padding: 22px 20px;
+            box-shadow: 0 6px 14px rgba(26, 62, 74, 0.05);
+            border: 1px solid rgba(50, 130, 140, 0.06);
+            transition: transform 0.1s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 22px -8px rgba(18, 90, 100, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .card-header em {
+            font-style: normal;
+            background: #ccf0f5;
+            color: #11515f;
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .card-header .dot-icon {
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            background: #2c909e;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0d444f;
+            letter-spacing: -0.2px;
+        }
+
+        .card-text {
+            font-size: 0.94rem;
+            color: #2c4a55;
+            line-height: 1.6;
+        }
+
+        .card-text a {
+            color: #158090;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1.5px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .card-text a:hover {
+            border-bottom-color: #158090;
+        }
+
+        .card-text .tag {
+            display: inline-block;
+            background: #e3f4f7;
+            color: #0a4a57;
+            padding: 0 10px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .highlight-quote {
+            background: #e7f6fa;
+            border-left: 5px solid #288a99;
+            padding: 16px 18px;
+            border-radius: 20px;
+            margin: 24px 0 18px;
+            font-size: 0.95rem;
+            color: #12434e;
+        }
+
+        .highlight-quote strong {
+            color: #0b4d5a;
+        }
+
+        /* 人群卡片 – 双列小卡片，移动端友好 */
+        .audience-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 12px 0 16px;
+        }
+
+        .audience-item {
+            background: white;
+            border-radius: 60px;
+            padding: 8px 18px 8px 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid #deeef2;
+            font-size: 0.88rem;
+            color: #1f5560;
+            flex: 1 0 auto;
+            max-width: fit-content;
+        }
+
+        .audience-item::before {
+            content: "●";
+            color: #2c9baa;
+            font-size: 0.75rem;
+        }
+
+        .footer-note {
+            font-size: 0.82rem;
+            color: #607b84;
+            text-align: center;
+            border-top: 1px solid #d2e4e9;
+            padding-top: 24px;
+            margin-top: 12px;
+        }
+
+        .footer-note a {
+            color: #1a7a8a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #a7cbd4;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #d3e6eb;
+            margin: 14px 0 18px;
+            opacity: 0.5;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 400px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .hero-card {
+                padding: 28px 18px 24px;
+            }
+            .info-card {
+                padding: 18px 16px;
+            }
+            .audience-item {
+                font-size: 0.82rem;
+                padding: 6px 14px 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 主视觉卡片 -->
+    <div class="hero-card">
+        <div class="hero-title">
+            稳定·<span>MK体育</span> 信息页
+        </div>
+        <div class="hero-sub">
+            ⚡ 卡片式入口 · 页面说明 <i>日常访问</i>
+        </div>
+    </div>
+
+    <!-- 用途卡片  自然链接句子 -->
+    <div class="grid-cards">
+        <div class="info-card">
+            <div class="card-header">
+                <span class="dot-icon"></span>
+                <em>用途说明</em>
+            </div>
+            <div class="card-text">
+                这个页面整理了关于 <a href="https://wapweb-mk.com">MK体育</a> 的一些基础信息，方便你快速了解平台的大致定位。日常想浏览体育资讯或查看动态，直接以 <span class="tag">MK体育</span> 作为稳定入口即可，不必每次搜索。
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <span class="dot-icon"></span>
+                <em>页面说明</em>
+            </div>
+            <div class="card-text">
+                我们以信息卡片的方式介绍主要用途、适合人群和常见场景。如果你只是偶尔想了解体育内容，不妨把 <a href="https://wapweb-mk.com">MK体育</a> 当作一个轻量起点。以下卡片内容仅作参考，具体体验以实际页面为准。
+            </div>
+        </div>
+    </div>
+
+    <!-- 特点 + 自然链接嵌入句子  -->
+    <div class="info-card" style="margin-bottom: 14px;">
+        <div class="card-header">
+            <span class="dot-icon"></span>
+            <em>特点速览</em>
+        </div>
+        <div class="card-text">
+            整体界面偏向移动端适配，内容更新比较规律。很多使用者反馈 <a href="https://wapweb-mk.com">MK体育</a> 的导航逻辑清晰，查找近期赛程或资讯不需要太多步骤。当然每个人习惯不同，你可以花几分钟感受一下布局是否顺手。
+        </div>
+    </div>
+
+    <!-- 适合人群 – 双列卡片风格 -->
+    <div style="margin: 12px 0 6px; font-weight: 600; color: #0b4c59; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+        <span style="background: #b3dce6; width: 20px; height: 4px; border-radius: 4px; display: inline-block;"></span> 
+        适合人群
+    </div>
+    <div class="audience-flex">
+        <span class="audience-item">日常关注体育动态</span>
+        <span class="audience-item">习惯手机浏览内容</span>
+        <span class="audience-item">喜欢简洁信息流</span>
+        <span class="audience-item">偶尔查询赛事资讯</span>
+        <span class="audience-item">不追求复杂注册流程</span>
+    </div>
+
+    <!-- 场景摘要 / FAQ 风格卡片 -->
+    <div class="highlight-quote">
+        <strong>❓ 常见使用场景</strong><br>
+        晚饭后翻翻最新动态、早晨快速浏览比分、通勤时看几段资讯摘要。这些场景下 <a href="https://wapweb-mk.com">MK体育</a> 的加载速度还不错，页面内容以文字和简洁列表为主，不拖沓。
+    </div>
+
+    <!-- 额外的自然段落：稳定入口角度 -->
+    <div class="info-card" style="background: #f2fafd;">
+        <div class="card-header">
+            <span class="dot-icon" style="background: #327e8c;"></span>
+            <em>稳定入口</em>
+        </div>
+        <div class="card-text">
+            很多朋友习惯把一些常用页面存成书签或者直接记住地址。如果你觉得 <a href="https://wapweb-mk.com">MK体育</a> 的内容风格合拍，不妨保留这个链接作为稳定入口，以后想浏览时直接打开，省去搜索步骤。页面本身也在不断优化，整体体验偏向轻量。
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- 结尾自然链接 + 说明 -->
+    <div class="footer-note">
+        <span>基于公开信息整理 · 页面仅作介绍，无诱导倾向</span><br>
+        更多内容可直接访问 <a href="https://wapweb-mk.com">MK体育</a>，以实际站点为准。
+    </div>
+
+</div>
+</body>
+</html>
